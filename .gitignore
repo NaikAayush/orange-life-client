@@ -46,3 +46,4 @@ Thumbs.db
 
 # env
 **/src/environments/
+.env
