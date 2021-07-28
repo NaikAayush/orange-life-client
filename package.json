@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "config:local": "ts-node ./src/assets/scripts/setEnv.ts --environment=dev",
-    "config:prod": "ts-node ./src/assets/scripts/setEnv.ts --environment=prod",
+    "config:local": "node ./src/assets/scripts/setEnv.js --environment=dev",
+    "config:prod": "node ./src/assets/scripts/setEnv.js --environment=prod",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
