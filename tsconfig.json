@@ -15,7 +15,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "stream": ["./node_modules/readable-stream"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
