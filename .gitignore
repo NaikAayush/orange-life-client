@@ -50,3 +50,5 @@ Thumbs.db
 
 # firebase
 .firebase
+.gitignore
+.prettierignore

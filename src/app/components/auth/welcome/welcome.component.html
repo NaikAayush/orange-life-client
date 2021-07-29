@@ -2,12 +2,12 @@
     <div
         class="max-w-7xl w-full self-center flex flex-col justify-center md:m-10 bg-white md:shadow md:rounded-lg h-full">
         <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <h3 class="text-lg text-center leading-6 font-medium text-gray-900">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Welcome to Orange Life
-            </h3>
+            </h2>
         </div>
         <div class="flex md:flex-row flex-col items-center">
-            <button type="button"
+            <button type="button" (click)="handleClick('old')"
                 class="m-4 relative block w-5/6 border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
@@ -19,7 +19,7 @@
                     Import existing account
                 </span>
             </button>
-            <button type="button"
+            <button type="button" (click)="handleClick('new')"
                 class="m-4 relative block w-5/6 border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
