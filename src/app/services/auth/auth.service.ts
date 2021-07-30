@@ -43,12 +43,13 @@ export class AuthService {
     // return { pk: root.privateKey?.toString('hex') };
   }
 
-  private deriveRoot(index: number) {
-    const data: any = this.getCredentials();
-    const root = bip32.fromPrivateKey(data.pk, data.chainCode);
-    const newRoot = root.derive(index);
-    return newRoot.privateKey.toString('hex');
-  }
+  // removed since this is implemented in ProxyReEncryptionKey
+  // private async deriveRoot(index: number) {
+    // const data = await this.getCredentials();
+    // const root = bip32.fromPrivateKey(data.pk, data.chainCode);
+    // const newRoot = root.derive(index);
+    // return newRoot.privateKey.toString('hex');
+  // }
 
   private hashPrivateKey(pk: string) {
     return btoa(pk);

@@ -32,13 +32,24 @@ export class ProxyReEncryptionKey {
   m = 2;
   n = 3;
 
-  constructor(umbral: typeof import('umbral-pre'), privateKey: string = null) {
+  constructor(
+    umbral: typeof import('umbral-pre'),
+    privateKey: string = null,
+    chaincode: Buffer = null
+  ) {
     this.umbral = umbral;
 
     if (privateKey === null) {
       this.generateNewKey();
     } else {
+      if (chaincode === null) {
+        throw "chaincode should be provided if pk is given";
+      }
       this.privateKeyHex = privateKey;
+      this.root = bip32.fromPrivateKey(
+        Buffer.from(fromHexString(this.privateKeyHex).buffer),
+        chaincode
+      );
     }
 
     const secretKey = this.loadUmbralKeys(this.privateKeyHex);
@@ -140,6 +151,8 @@ export class ProxyReEncryptionKey {
       result.ciphertext,
       signingKey,
       verifyKey,
+      this.publicKey,
+      receiverPubKey,
       nonce,
       kfrags
     );

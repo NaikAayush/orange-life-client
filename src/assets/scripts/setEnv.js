@@ -43,7 +43,8 @@ const environmentFileContent = `
   export const environment = {
     production: ${isProduction},
     TEST_API_KEY: '${process.env.TEST_API_KEY}',
-    IPFS_GATEWAY: '${process.env.IPFS_GATEWAY}'
+    IPFS_GATEWAY: '${process.env.IPFS_GATEWAY}',
+    URSULA_DOMAINS: '${process.env.URSULA_DOMAINS}'
   };
 `;
 

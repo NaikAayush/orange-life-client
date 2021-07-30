@@ -15,6 +15,8 @@ export class EncryptedData {
     public ciphertext: Uint8Array,
     public signingKey: ImportClass<UmbralType, 'SecretKey'>,
     public verifyKey: ImportClass<UmbralType, 'PublicKey'>,
+    public delegatingPubKey: ImportClass<UmbralType, 'PublicKey'>,
+    public receivingPubKey: ImportClass<UmbralType, 'PublicKey'>,
     public nonce: number,
     public kfrags: any[]
   ) {}
@@ -30,6 +32,8 @@ export class EncryptedData {
       toHexString(this.ciphertext),
       toHexString(this.signingKey.toSecretBytes()),
       toHexString(this.verifyKey.toBytes()),
+      toHexString(this.delegatingPubKey.toBytes()),
+      toHexString(this.receivingPubKey.toBytes()),
       this.nonce,
       newKfrags
     );
