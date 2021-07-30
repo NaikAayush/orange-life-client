@@ -25,13 +25,33 @@ export class AuthService {
     const seed = this.generateSeed(mnem, password);
     const root = this.generateBIP32(seed);
     // console.log({ mnemonic: mnem, pk: root.privateKey?.toString('hex') });
-    return { mnemonic: mnem, pk: root.privateKey?.toString('hex') };
+    this.login(root.privateKey?.toString('hex'));
+    return { mnemonic: mnem };
   }
 
   public retrieveAccount(mnem: any, password: any) {
     const seed = this.generateSeed(mnem, password);
     const root = this.generateBIP32(seed);
     // console.log({ pk: root.privateKey?.toString('hex') });
-    return { pk: root.privateKey?.toString('hex') };
+    this.login(root.privateKey?.toString('hex'));
+    // return { pk: root.privateKey?.toString('hex') };
+  }
+
+  private hashPrivateKey(pk: string) {
+    return btoa(pk);
+  }
+
+  private login(pk: string) {
+    const hash = this.hashPrivateKey(pk);
+    localStorage.setItem('pk-hash', hash);
+  }
+
+  public logout() {
+    localStorage.removeItem('pk-hash');
+  }
+
+  public getPrivateKey() {
+    console.log(atob(localStorage.getItem('pk-hash')));
+    return atob(localStorage.getItem('pk-hash'));
   }
 }
