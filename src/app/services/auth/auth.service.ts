@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as bip32 from 'bip32';
 import * as Bip39 from 'bip39';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { keyfrag_equals } from 'src/assets/umbral/pkg/pkg-bundler/umbral_pre_wasm_bg.wasm';
 
 @Injectable({
   providedIn: 'root',

@@ -2,21 +2,14 @@ import * as bip32 from 'bip32';
 import { EncryptedData } from './EncryptedData';
 // TODO
 import * as bip39 from 'bip39';
-
-type UmbralType = typeof import('umbral-pre');
-type ImportClass<T, K extends keyof T> = T extends Record<K, infer S>
-  ? S extends new (...args: any[]) => infer R
-    ? R
-    : never
-  : never;
-const fromHexString = (hexString: string) =>
-  new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
-
-const toHexString = (bytes: Uint8Array) =>
-  bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
-function typedArrayToBuffer(array: Uint8Array): ArrayBuffer {
-    return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
-}
+import {
+  UmbralType,
+  ImportClass,
+  fromHexString,
+  toHexString,
+  typedArrayToBuffer,
+} from '../utils';
+import { ReceivedData } from './ReceivedData';
 
 export class ProxyReEncryptionKey {
   log = true;
@@ -47,7 +40,7 @@ export class ProxyReEncryptionKey {
       this.generateNewKey();
     } else {
       if (chaincode === null) {
-        throw "chaincode should be provided if pk is given";
+        throw 'chaincode should be provided if pk is given';
       }
       this.privateKeyHex = privateKey;
       this.root = bip32.fromPrivateKey(
@@ -114,6 +107,10 @@ export class ProxyReEncryptionKey {
     return toHexString(this.publicKey.toBytes());
   }
 
+  public getSecKeyHex() {
+    return this.privateKeyHex;
+  }
+
   // encrypt decrypt stuff here
 
   // number between 0 and 2**31-1
@@ -160,5 +157,23 @@ export class ProxyReEncryptionKey {
       nonce,
       kfrags
     );
+  }
+
+  public decrypt(data: ReceivedData) {
+    // make CapsuleWithCfrag with one cfrag
+    let capsule = data.capsule.withCFrag(data.cfrags[0]);
+
+    // add all cfrags except first
+    data.cfrags.slice(1).forEach((cfrag) => {
+      capsule = capsule.withCFrag(cfrag);
+    });
+
+    const decryptedData = capsule.decryptReencrypted(
+      data.receiverSecretKey,
+      data.senderPubKey,
+      data.data
+    );
+
+    return decryptedData;
   }
 }
