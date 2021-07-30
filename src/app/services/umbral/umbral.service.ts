@@ -70,8 +70,13 @@ export class UmbralService {
     );
 
     await this.sendData(encryptedData);
+
+    return encryptedData;
+  }
+
+  getDataAsFile(filename: string, encryptedData: EncryptedData) {
     const buffer = encryptedData.ciphertext.buffer;
-    const encryptedFile = new File([buffer as BlobPart], file.name);
+    const encryptedFile = new File([buffer as BlobPart], filename);
     return encryptedFile;
   }
 

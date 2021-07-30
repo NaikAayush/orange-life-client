@@ -12,11 +12,11 @@ export class IpfsService {
     return create(environment.IPFS_GATEWAY as any);
   }
 
-  public async uploadFile(client, file) {
+  public async uploadFile(client: ReturnType<typeof create>, file: File) {
     return await client.add(file);
   }
 
-  public async uploadString(client, string) {
+  public async uploadString(client: ReturnType<typeof create>, string: string) {
     return await client.add(string);
   }
 }

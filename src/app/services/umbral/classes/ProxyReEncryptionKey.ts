@@ -83,6 +83,7 @@ export class ProxyReEncryptionKey {
       const publicKey = secretKey.publicKey();
       console.log('secret key', secretKey.toString());
       console.log('secret key bytes', secretKey.toSecretBytes());
+      console.log('secret key hex', this.privateKeyHex);
       console.log('public key', publicKey.toString());
       console.log('public key bytes', publicKey.toBytes());
       console.log('public key hex', toHexString(publicKey.toBytes()));
