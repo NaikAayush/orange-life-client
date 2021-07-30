@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as bip32 from 'bip32';
 import * as Bip39 from 'bip39';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { keyfrag_equals } from 'src/assets/umbral/pkg/pkg-bundler/umbral_pre_wasm_bg.wasm';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +44,10 @@ export class AuthService {
   }
 
   private deriveRoot(index: number) {
-    const pk = this.getCredentials();
-    // const x = bip32.fromPrivateKey(pk)
+    const data: any = this.getCredentials();
+    const root = bip32.fromPrivateKey(data.pk, data.chainCode);
+    const newRoot = root.derive(index);
+    return newRoot.privateKey.toString('hex');
   }
 
   private hashPrivateKey(pk: string) {
@@ -69,5 +72,6 @@ export class AuthService {
     const pk = atob(data.privateKey);
     const chainCode = data.chainCode;
     console.log(pk, chainCode);
+    return { pk: pk, chainCode: chainCode };
   }
 }
