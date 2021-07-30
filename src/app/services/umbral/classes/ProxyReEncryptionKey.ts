@@ -1,4 +1,8 @@
 import * as bip32 from 'bip32';
+import { EncryptedData } from './EncryptedData';
+// TODO
+import * as bip39 from 'bip39';
+
 type UmbralType = typeof import('umbral-pre');
 type ImportClass<T, K extends keyof T> = T extends Record<K, infer S>
   ? S extends new (...args: any[]) => infer R
@@ -10,9 +14,9 @@ const fromHexString = (hexString: string) =>
 
 const toHexString = (bytes: Uint8Array) =>
   bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
-import { EncryptedData } from './EncryptedData';
-// TODO
-import * as bip39 from 'bip39';
+function typedArrayToBuffer(array: Uint8Array): ArrayBuffer {
+    return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
+}
 
 export class ProxyReEncryptionKey {
   log = true;
@@ -35,7 +39,7 @@ export class ProxyReEncryptionKey {
   constructor(
     umbral: typeof import('umbral-pre'),
     privateKey: string = null,
-    chaincode: Buffer = null
+    chaincode: Uint8Array = null
   ) {
     this.umbral = umbral;
 
@@ -47,8 +51,8 @@ export class ProxyReEncryptionKey {
       }
       this.privateKeyHex = privateKey;
       this.root = bip32.fromPrivateKey(
-        Buffer.from(fromHexString(this.privateKeyHex).buffer),
-        chaincode
+        Buffer.from(typedArrayToBuffer(fromHexString(this.privateKeyHex))),
+        Buffer.from(typedArrayToBuffer(chaincode))
       );
     }
 

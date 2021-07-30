@@ -38,7 +38,8 @@ export class UmbralService {
     await this.importUmbralIfNotAlready();
 
     const creds = await this.auth.getCredentials();
-    const key = new ProxyReEncryptionKey(this.umbral, creds.pk, creds.chainCode);
+    const chaincode: Uint8Array = creds.chainCode;
+    const key = new ProxyReEncryptionKey(this.umbral, creds.pk, chaincode);
 
     const fileBytes = new Uint8Array(await file.arrayBuffer())
     const encryptedData = key.encryptBytes(fileBytes, key.publicKey);
