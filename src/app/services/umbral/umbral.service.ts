@@ -41,12 +41,13 @@ export class UmbralService {
     const chaincode: Uint8Array = creds.chainCode;
     const key = new ProxyReEncryptionKey(this.umbral, creds.pk, chaincode);
 
-    const fileBytes = new Uint8Array(await file.arrayBuffer())
+    const fileBytes = new Uint8Array(await file.arrayBuffer());
     const encryptedData = key.encryptBytes(fileBytes, key.publicKey);
 
     await this.sendData(encryptedData);
-
-    return encryptedData;
+    const buffer = encryptedData.ciphertext.buffer;
+    const encryptedFile = new File([buffer as BlobPart], file.name);
+    return encryptedFile;
   }
 
   private async sendData(data: EncryptedData) {
@@ -70,13 +71,15 @@ export class UmbralService {
         kfrag
       );
 
-      const res = this.http.post<GrantParams>(`${this.ursulaDomains[i]}/v1/grant`, bodyParams).toPromise();
+      const res = this.http
+        .post<GrantParams>(`${this.ursulaDomains[i]}/v1/grant`, bodyParams)
+        .toPromise();
       promises.push(res);
     }
 
     const resps = await Promise.all(promises);
     resps.forEach((resp) => {
-      console.log("Response from ursula", resp);
+      console.log('Response from ursula', resp);
     });
   }
 }
