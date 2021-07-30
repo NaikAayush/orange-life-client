@@ -8,7 +8,7 @@ import { Web3Service } from 'src/app/services/web3/web3.service';
   styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(private router: Router, private web3: Web3Service) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
