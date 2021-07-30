@@ -13,17 +13,44 @@ import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadComponent } from './components/dashboard/upload/upload.component';
 
+import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
+
+const dbConfig: DBConfig = {
+  name: 'MyDb',
+  version: 1,
+  objectStoresMeta: [
+    {
+      store: 'auth',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        {
+          name: 'privateKey',
+          keypath: 'privateKey',
+          options: { unique: true },
+        },
+        { name: 'chainCode', keypath: 'chainCode', options: { unique: true } },
+      ],
+    },
+  ],
+};
+
 @NgModule({
   declarations: [
     AppComponent,
-    HttpClientModule,
     PublicNavbarComponent,
     PrivateNavbarComponent,
     WelcomeComponent,
     AuthPwMnFormComponent,
     UploadComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxIndexedDBModule.forRoot(dbConfig),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -20,6 +20,7 @@ export class AuthPwMnFormComponent implements OnInit {
     if (this.activatedRoute.snapshot.paramMap.get('type') == 'old') {
       this.new = false;
     }
+    this.auth.getCredentials();
   }
 
   newAccount(newForm: NgForm) {
