@@ -21,7 +21,7 @@ const dbConfig: DBConfig = {
   objectStoresMeta: [
     {
       store: 'auth',
-      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeConfig: { keyPath: 'id', autoIncrement: false },
       storeSchema: [
         {
           name: 'privateKey',

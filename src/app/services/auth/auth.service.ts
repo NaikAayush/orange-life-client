@@ -53,16 +53,11 @@ export class AuthService {
 
   private login(pk: string, chainCode: Buffer) {
     const hash = this.hashPrivateKey(pk);
-    this.dbService
-      .add('auth', {
-        privateKey: hash,
-        chainCode: chainCode,
-      })
-      .subscribe((item) => {
-        console.log('item: ', item);
-      });
-    localStorage.setItem('pk-hash', hash);
-    localStorage.setItem('chain-code', chainCode.toString());
+    this.dbService.update('auth', {
+      id: 1,
+      privateKey: hash,
+      chainCode: chainCode,
+    });
   }
 
   public logout() {
@@ -70,8 +65,9 @@ export class AuthService {
   }
 
   public async getCredentials() {
-    console.log(atob(localStorage.getItem('pk-hash')));
-    console.log(Buffer.from(localStorage.getItem('chain-code')));
-    return atob(localStorage.getItem('pk-hash'));
+    const data: any = await this.dbService.getByKey('auth', 1).toPromise();
+    const pk = atob(data.privateKey);
+    const chainCode = data.chainCode;
+    console.log(pk, chainCode);
   }
 }
