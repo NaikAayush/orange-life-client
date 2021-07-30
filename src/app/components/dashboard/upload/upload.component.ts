@@ -12,12 +12,8 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {}
   async handleFileInput(files: FileList) {
-    const encData = this.umbral.uploadFile(files.item(0));
-
-    console.log(encData);
-
-    // const client = this.ipfs.connectToNetwork();
-
-    // console.log(await this.ipfs.uploadFile(client, files.item(0)));
+    const encryptedFile = await this.umbral.uploadFile(files.item(0));
+    const client = this.ipfs.connectToNetwork();
+    console.log(await this.ipfs.uploadFile(client, encryptedFile));
   }
 }
