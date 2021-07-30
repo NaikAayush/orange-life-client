@@ -8,6 +8,7 @@ import { PrivateNavbarComponent } from './components/navbar/private-navbar/priva
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploadComponent } from './components/dashboard/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PrivateNavbarComponent,
     WelcomeComponent,
     AuthPwMnFormComponent,
+    UploadComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
