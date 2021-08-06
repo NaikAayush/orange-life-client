@@ -14,6 +14,7 @@ import { UploadComponent } from './components/dashboard/upload/upload.component'
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
 import { PublicNavbarComponent } from './components/public/navbar/public-navbar/public-navbar.component';
 import { PrivateNavbarComponent } from './components/private/navbar/private-navbar/private-navbar.component';
+import { PrivateSidebarComponent } from './components/private/private-sidebar/private-sidebar.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -42,6 +43,7 @@ const dbConfig: DBConfig = {
     WelcomeComponent,
     AuthPwMnFormComponent,
     UploadComponent,
+    PrivateSidebarComponent,
   ],
   imports: [
     BrowserModule,
