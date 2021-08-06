@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { PublicNavbarComponent } from './components/navbar/public-navbar/public-navbar.component';
-import { PrivateNavbarComponent } from './components/navbar/private-navbar/private-navbar.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadComponent } from './components/dashboard/upload/upload.component';
 
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
+import { PublicNavbarComponent } from './components/public/navbar/public-navbar/public-navbar.component';
+import { PrivateNavbarComponent } from './components/private/navbar/private-navbar/private-navbar.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
