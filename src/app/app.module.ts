@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
@@ -56,6 +56,7 @@ const dbConfig: DBConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
+    BrowserAnimationsModule,
     MatSidenavModule,
   ],
   providers: [],
