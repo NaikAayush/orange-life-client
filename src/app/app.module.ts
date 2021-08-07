@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,6 +56,7 @@ const dbConfig: DBConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
