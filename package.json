@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
     "@apollo/client": "^3.4.5",
+    "@opengsn/provider": "^2.2.2",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "@ts-bitcoin/core": "^2.2.0",

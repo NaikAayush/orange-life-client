@@ -15,9 +15,11 @@
     "lib": ["es2018", "dom"],
     "resolveJsonModule": true,
     "paths": {
-      "stream": ["./node_modules/readable-stream"]
+      "stream": ["./node_modules/readable-stream"],
+      "@opengsn/provider": ["./node_modules/@opengsn/provider"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
