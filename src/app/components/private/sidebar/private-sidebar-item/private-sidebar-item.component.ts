@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PrivateSidebarItemComponent implements OnInit {
   @Input() text = '';
   @Input() data = {};
+  @Input() svg = '';
+  x = 'a';
   selected = false;
 
   constructor() {}

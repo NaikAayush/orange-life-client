@@ -14,7 +14,8 @@ export class AppComponent implements OnInit {
   mode: string;
   backdrop: string;
   menuState: boolean = false;
-  menuItems = ['Dashboard', 'Medical Records', 'Requests', 'Trusted Contacts'];
+  // menuItems = ['Dashboard', 'Medical Records', 'Requests', 'Trusted Contacts'];
+
   mobile: boolean;
   events: string[] = [];
   opened: boolean;
