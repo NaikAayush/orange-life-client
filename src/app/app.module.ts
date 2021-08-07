@@ -23,6 +23,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
+import { DownloadComponent } from './components/private/view/download/download.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -54,6 +55,7 @@ const dbConfig: DBConfig = {
     PrivateSidebarComponent,
     PrivateSidebarItemComponent,
     DashboardComponent,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,

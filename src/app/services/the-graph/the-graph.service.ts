@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,21 +17,17 @@ export class TheGraphService {
       }
     }
   `;
-  private querySubscription: Subscription;
+  private querySubscription;
   loading: boolean;
   posts: any;
 
   constructor(private apollo: Apollo) {}
 
-  exampleQuery() {
-    this.querySubscription = this.apollo
-      .watchQuery<any>({
+  async exampleQuery() {
+    return await this.apollo
+      .query<any>({
         query: this.GET_RECORD,
       })
-      .valueChanges.subscribe(({ data, loading }) => {
-        this.loading = loading;
-        this.posts = data.medicalRecords;
-        console.log(data);
-      });
+      .toPromise();
   }
 }
