@@ -27,6 +27,7 @@
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "@ts-bitcoin/core": "^2.2.0",
+    "angularx-qrcode": "^11.0.0",
     "apollo-angular": "^2.6.0",
     "bip32": "^2.0.6",
     "bip39": "^3.0.4",

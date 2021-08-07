@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
+import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { DownloadComponent } from './components/private/view/download/download.component';
 import { UploadComponent } from './components/private/view/upload/upload.component';
 
@@ -29,6 +30,11 @@ const routes: Routes = [
     path: 'download',
     component: DownloadComponent,
     data: { title: 'Download' },
+  },
+  {
+    path: 'qr',
+    component: DisplayQrComponent,
+    data: { title: 'QR' },
   },
 ];
 

@@ -24,6 +24,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -56,6 +58,7 @@ const dbConfig: DBConfig = {
     PrivateSidebarItemComponent,
     DashboardComponent,
     DownloadComponent,
+    DisplayQrComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ const dbConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(dbConfig),
     BrowserAnimationsModule,
     MatSidenavModule,
+    QRCodeModule,
   ],
   providers: [
     {
