@@ -18,6 +18,7 @@ import { PublicNavbarComponent } from './components/public/navbar/public-navbar/
 import { PrivateNavbarComponent } from './components/private/navbar/private-navbar/private-navbar.component';
 import { PrivateSidebarComponent } from './components/private/sidebar/private-sidebar/private-sidebar.component';
 import { PrivateSidebarItemComponent } from './components/private/sidebar/private-sidebar-item/private-sidebar-item.component';
+import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -48,6 +49,7 @@ const dbConfig: DBConfig = {
     UploadComponent,
     PrivateSidebarComponent,
     PrivateSidebarItemComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

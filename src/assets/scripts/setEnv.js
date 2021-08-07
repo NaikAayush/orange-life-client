@@ -44,7 +44,8 @@ const environmentFileContent = `
     production: ${isProduction},
     TEST_API_KEY: '${process.env.TEST_API_KEY}',
     IPFS_GATEWAY: '${process.env.IPFS_GATEWAY}',
-    URSULA_DOMAINS: '${process.env.URSULA_DOMAINS}'
+    URSULA_DOMAINS: '${process.env.URSULA_DOMAINS}',
+    INFURA_URL: '${process.env.INFURA_URL}'
   };
 `;
 
