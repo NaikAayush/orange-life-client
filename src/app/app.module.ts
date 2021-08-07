@@ -19,6 +19,10 @@ import { PrivateNavbarComponent } from './components/private/navbar/private-navb
 import { PrivateSidebarComponent } from './components/private/sidebar/private-sidebar/private-sidebar.component';
 import { PrivateSidebarItemComponent } from './components/private/sidebar/private-sidebar-item/private-sidebar-item.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
+import { environment } from 'src/environments/environment';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -61,7 +65,20 @@ const dbConfig: DBConfig = {
     BrowserAnimationsModule,
     MatSidenavModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: environment.THEGRAPH_URI,
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

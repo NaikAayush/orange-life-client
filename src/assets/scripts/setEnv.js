@@ -46,6 +46,7 @@ const environmentFileContent = `
     IPFS_GATEWAY: '${process.env.IPFS_GATEWAY}',
     URSULA_DOMAINS: '${process.env.URSULA_DOMAINS}',
     INFURA_URL: '${process.env.INFURA_URL}',
+    THEGRAPH_URI: '${process.env.THEGRAPH_URI}',
   };
 `;
 
