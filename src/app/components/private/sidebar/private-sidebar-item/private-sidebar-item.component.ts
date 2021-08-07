@@ -9,7 +9,7 @@ export class PrivateSidebarItemComponent implements OnInit {
   @Input() text = '';
   @Input() data = {};
   @Input() svg = '';
-  x = 'a';
+  @Input() route = '';
   selected = false;
 
   constructor() {}
