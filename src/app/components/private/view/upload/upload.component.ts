@@ -39,10 +39,10 @@ export class UploadComponent implements OnInit {
   }
 
   async handleFileInput() {
-    var files = this.files;
-    const encryptedData = await this.umbral.uploadFile(files.item(0));
+    const fileToUpload = this.files.item(0);
+    const encryptedData = await this.umbral.uploadFile(fileToUpload);
     const encryptedFile = this.umbral.getDataAsFile(
-      files.item(0).name,
+      fileToUpload.name,
       encryptedData
     );
     const client = this.ipfs.connectToNetwork();
@@ -55,6 +55,8 @@ export class UploadComponent implements OnInit {
     console.log('hmm');
     await this.web3.getRecords();
     await this.web3.addRecord(
+      fileToUpload.name,
+      fileToUpload.type,
       uploadedFile.cid.toString(),
       toHexString(encryptedData.verifyKey.toBytes()),
       toHexString(encryptedData.delegatingPubKey.toBytes()),

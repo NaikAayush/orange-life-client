@@ -31,7 +31,7 @@ export class Web3Service {
       // their accept-all paymaster
       // paymasterAddress: '0xcA94aBEdcC18A10521aB7273B3F3D5ED28Cf7B8A',
       // forwarderAddress: '0x4d4581c01A457925410cd3877d17b2fd4553b2C5',
-      ourContract: '0xAd7879348C00AD6E5c88E418b7E66A0D386Ee733',
+      // ourContract: '0xAd7879348C00AD6E5c88E418b7E66A0D386Ee733',
       loggerConfiguration: {
         logLevel: 'debug' as any
       },
@@ -58,7 +58,7 @@ export class Web3Service {
 
     this.contract = new this.web3.eth.Contract(
       contractAbi as any,
-      '0xAd7879348C00AD6E5c88E418b7E66A0D386Ee733',
+      '0x9cc6c1FB0ee80a2389a286da0BB7903dE0175172',
       { from: this.account.address }
     );
   }
@@ -73,17 +73,20 @@ export class Web3Service {
   }
 
   async addRecord(
+    name: string,
+    mimeType: string,
     cid: string,
     verifyKey: string,
     pubKey: string,
-    nonce: number
+    nonce: number,
+    extraData: string = ""
   ) {
     await this.initPromise;
 
-    console.log('adding record', cid, verifyKey, pubKey, nonce, this.account.address);
+    console.log('adding record', name, mimeType, cid, verifyKey, pubKey, nonce, extraData, this.account.address);
 
     const res = this.contract.methods
-      .addMedicalRecord(cid, verifyKey, pubKey, nonce)
+      .addMedicalRecord(cid, verifyKey, pubKey, name, mimeType, extraData, nonce)
       .send({ from: this.account.address,  gas: 2000000 });
 
     res
