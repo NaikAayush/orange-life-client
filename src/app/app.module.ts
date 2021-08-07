@@ -9,12 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UploadComponent } from './components/dashboard/upload/upload.component';
+import { UploadComponent } from './components/private/view/upload/upload.component';
 
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
 import { PublicNavbarComponent } from './components/public/navbar/public-navbar/public-navbar.component';
 import { PrivateNavbarComponent } from './components/private/navbar/private-navbar/private-navbar.component';
-import { PrivateSidebarComponent } from './components/private/private-sidebar/private-sidebar.component';
+import { PrivateSidebarComponent } from './components/private/sidebar/private-sidebar/private-sidebar.component';
+import { PrivateSidebarItemComponent } from './components/private/sidebar/private-sidebar-item/private-sidebar-item.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -44,6 +45,7 @@ const dbConfig: DBConfig = {
     AuthPwMnFormComponent,
     UploadComponent,
     PrivateSidebarComponent,
+    PrivateSidebarItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateSidebarComponent implements OnInit {
   menuState: boolean = false;
+  menuItems = ['Dashboard', 'Medical Records', 'Requests', 'Trusted Contacts'];
 
   constructor() {}
 

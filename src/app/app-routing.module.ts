@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
-import { UploadComponent } from './components/dashboard/upload/upload.component';
+import { UploadComponent } from './components/private/view/upload/upload.component';
 
 const routes: Routes = [
   {

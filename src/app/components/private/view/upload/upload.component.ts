@@ -16,8 +16,30 @@ export class UploadComponent implements OnInit {
     private web3: Web3Service
   ) {}
 
+  menuState: boolean = false;
+  file: boolean = false;
+  fileName: String = '';
+  files: FileList;
+  menuItems = ['Dashboard', 'Medical Records', 'Requests', 'Trusted Contacts'];
+
+  setMenuState() {
+    if (this.menuState == true) {
+      this.menuState = false;
+    } else {
+      this.menuState = true;
+    }
+  }
+
   ngOnInit(): void {}
-  async handleFileInput(files: FileList) {
+
+  async prepareFile(files: FileList) {
+    this.files = files;
+    this.file = true;
+    this.fileName = files.item(0).name;
+  }
+
+  async handleFileInput() {
+    var files = this.files;
     const encryptedData = await this.umbral.uploadFile(files.item(0));
     const encryptedFile = this.umbral.getDataAsFile(
       files.item(0).name,
