@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadComponent,
+    data: { title: 'Upload' },
   },
 ];
 
