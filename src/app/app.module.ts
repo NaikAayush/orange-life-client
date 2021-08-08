@@ -34,6 +34,8 @@ import { RecordRenderComponent } from './components/private/view/records/record-
 import { SafePipe } from './services/safe/safe.pipe';
 import { RecordRenderUserComponent } from './components/private/view/records/record-render/record-render-user/record-render-user.component';
 import { RecordRenderTimelineItemComponent } from './components/private/view/records/record-render/record-render-timeline-item/record-render-timeline-item.component';
+import { RequestsComponent } from './components/private/view/requests/requests.component';
+import { RequestItemComponent } from './components/private/view/requests/request-item/request-item.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -74,6 +76,8 @@ const dbConfig: DBConfig = {
     SafePipe,
     RecordRenderUserComponent,
     RecordRenderTimelineItemComponent,
+    RequestsComponent,
+    RequestItemComponent,
   ],
   imports: [
     BrowserModule,

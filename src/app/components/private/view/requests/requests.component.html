@@ -1,0 +1,4 @@
+<div class="m-6" *ngFor="let item of data;">
+    <app-request-item [fileName]="item.docName" [nonce]="item.nonce" [idx]="item.idx" [address]="item.accessRequested"></app-request-item>
+    <!-- <app-record-item [name]="item.docName" [access]="item.hasAccess.length" [id]="item.id" [pk]="item.publicKey" [vk]="item.verifyingKey" [docName]="item.docName" [docMimeType]="item.docMimeType" [nonce]="item.nonce" [idx]="item.idx" [status]="item.status" [owner]="item.owner"></app-record-item> -->
+</div>
