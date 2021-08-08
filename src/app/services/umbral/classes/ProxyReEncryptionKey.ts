@@ -160,6 +160,30 @@ export class ProxyReEncryptionKey {
     );
   }
 
+  public generateKFragsAndSignKeys(receiverPubKey: ImportClass<UmbralType, 'PublicKey'>, nonce: number) {
+    const signingKey = this.generateSigningKey(nonce);
+    const signer = new this.umbral.Signer(signingKey);
+    const verifyKey = signingKey.publicKey();
+
+    // make key fragments
+    const kfrags = this.umbral.generateKFrags(
+      this.secretKey,
+      receiverPubKey,
+      signer,
+      this.m,
+      this.n,
+      true,
+      true
+    );
+
+    return {
+      kfrags,
+      signingKey,
+      signer,
+      verifyKey
+    }
+  }
+
   public decrypt(data: ReceivedData) {
     // make CapsuleWithCfrag with one cfrag
     let capsule = data.capsule.withCFrag(data.cfrags[0]);

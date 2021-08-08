@@ -1,0 +1,21 @@
+<li (click)="openRecord()" class="col-span-1 flex shadow-sm rounded-md">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 {{color}} text-white text-sm font-medium rounded-l-md">
+        <!-- {{shortName}} -->
+        <img [src]="fileType" class="w-10">
+    </div>
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+        <div class="flex-1 px-4 py-2 text-sm truncate">
+            <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{name}}</a>
+            <p class="text-gray-500">{{access}} users have access</p>
+        </div>
+        <div class="flex-shrink-0 pr-2">
+            <button (click)="openRecord()" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <span class="sr-only">Open record</span>
+                <!-- Heroicon name: solid/dots-vertical -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</li>
