@@ -44,10 +44,10 @@ export class AuthService {
 
   // removed since this is implemented in ProxyReEncryptionKey
   // private async deriveRoot(index: number) {
-    // const data = await this.getCredentials();
-    // const root = bip32.fromPrivateKey(data.pk, data.chainCode);
-    // const newRoot = root.derive(index);
-    // return newRoot.privateKey.toString('hex');
+  // const data = await this.getCredentials();
+  // const root = bip32.fromPrivateKey(data.pk, data.chainCode);
+  // const newRoot = root.derive(index);
+  // return newRoot.privateKey.toString('hex');
   // }
 
   private hashPrivateKey(pk: string) {
@@ -64,14 +64,27 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem('pk-hash');
+    localStorage.removeItem('auth');
   }
 
   public async getCredentials() {
     const data: any = await this.dbService.getByKey('auth', 1).toPromise();
     const pk = atob(data.privateKey);
     const chainCode = data.chainCode;
-    console.log(pk, chainCode);
-    return { pk: pk, chainCode: chainCode };
+    const address = data.address;
+    // console.log(pk, chainCode, address);
+    return { pk: pk, chainCode: chainCode, address: address };
+  }
+
+  public async storeAddress(address) {
+    const data = await this.getCredentials();
+    const hash = this.hashPrivateKey(data.pk);
+    this.dbService.update('auth', {
+      id: 1,
+      privateKey: hash,
+      chainCode: data.chainCode,
+      address: address,
+    });
+    // console.log('done');
   }
 }

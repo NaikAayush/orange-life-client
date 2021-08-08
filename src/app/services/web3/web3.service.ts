@@ -33,16 +33,16 @@ export class Web3Service {
       // forwarderAddress: '0x4d4581c01A457925410cd3877d17b2fd4553b2C5',
       // ourContract: '0xAd7879348C00AD6E5c88E418b7E66A0D386Ee733',
       loggerConfiguration: {
-        logLevel: 'debug' as any
+        logLevel: 'debug' as any,
       },
       // preferredRelays: ['0x1d89e298a3aB270F4E0644D6dA46C6E001b34e3A'],
       relayRegistrationLookupBlocks: 60000,
-      sliceSize: 1
+      sliceSize: 1,
     };
 
     const provider = await RelayProvider.newProvider({
       provider: this.web3.currentProvider as any,
-      config: configuration
+      config: configuration,
     }).init();
     // const provider = new RelayProvider(
     //   this.web3.currentProvider as any,
@@ -53,6 +53,7 @@ export class Web3Service {
     const data = await this.auth.getCredentials();
     const pk = data.pk;
     this.account = this.web3.eth.accounts.privateKeyToAccount(pk);
+    this.auth.storeAddress(this.account.address);
     provider.addAccount(this.account.privateKey);
     console.log(this.account);
 
@@ -79,15 +80,33 @@ export class Web3Service {
     verifyKey: string,
     pubKey: string,
     nonce: number,
-    extraData: string = ""
+    extraData: string = ''
   ) {
     await this.initPromise;
 
-    console.log('adding record', name, mimeType, cid, verifyKey, pubKey, nonce, extraData, this.account.address);
+    console.log(
+      'adding record',
+      name,
+      mimeType,
+      cid,
+      verifyKey,
+      pubKey,
+      nonce,
+      extraData,
+      this.account.address
+    );
 
     const res = this.contract.methods
-      .addMedicalRecord(cid, verifyKey, pubKey, name, mimeType, extraData, nonce)
-      .send({ from: this.account.address,  gas: 2000000 });
+      .addMedicalRecord(
+        cid,
+        verifyKey,
+        pubKey,
+        name,
+        mimeType,
+        extraData,
+        nonce
+      )
+      .send({ from: this.account.address, gas: 2000000 });
 
     res
       .once('sending', function (payload) {

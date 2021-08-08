@@ -4,6 +4,7 @@ import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { RecordsComponent } from './components/private/view/records/records.component';
 import { UploadComponent } from './components/private/view/upload/upload.component';
 
 const routes: Routes = [
@@ -29,6 +30,11 @@ const routes: Routes = [
     path: 'download',
     component: DownloadComponent,
     data: { title: 'Download' },
+  },
+  {
+    path: 'records',
+    component: RecordsComponent,
+    data: { title: 'Medical Records' },
   },
 ];
 
