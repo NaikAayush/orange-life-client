@@ -27,6 +27,9 @@ export class TheGraphService {
         docCID
         docName
         hasAccess
+        publicKey
+        verifyingKey
+        docMimeType
       }
     }
   `;

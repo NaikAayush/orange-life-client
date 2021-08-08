@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-record-item',
@@ -8,6 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RecordItemComponent implements OnInit {
   @Input() name: string;
   @Input() access: number;
+  @Input() id: string;
+  @Input() pk: string;
+  @Input() vk: string;
+  @Input() docName: string;
+  @Input() docMimeType: string;
   shortName: string;
   fileExtensions = ['.png', '.jpg', '.pdf'];
   color: string;
@@ -19,7 +25,7 @@ export class RecordItemComponent implements OnInit {
   ];
   fileType: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.access = this.access - 1;
@@ -44,5 +50,20 @@ export class RecordItemComponent implements OnInit {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  openRecord() {
+    this.router.navigateByUrl(
+      'record/' +
+        this.id +
+        '/' +
+        this.pk +
+        '/' +
+        this.vk +
+        '/' +
+        this.docName +
+        '/' +
+        this.docMimeType
+    );
   }
 }

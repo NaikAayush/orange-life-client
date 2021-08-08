@@ -26,6 +26,10 @@ import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
 import { RecordsComponent } from './components/private/view/records/records.component';
 import { RecordItemComponent } from './components/private/view/records/record-item/record-item.component';
+import { RecordRenderComponent } from './components/private/view/records/record-render/record-render.component';
+import { SafePipe } from './services/safe/safe.pipe';
+import { RecordRenderUserComponent } from './components/private/view/records/record-render/record-render-user/record-render-user.component';
+import { RecordRenderTimelineItemComponent } from './components/private/view/records/record-render/record-render-timeline-item/record-render-timeline-item.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -60,6 +64,10 @@ const dbConfig: DBConfig = {
     DownloadComponent,
     RecordsComponent,
     RecordItemComponent,
+    RecordRenderComponent,
+    SafePipe,
+    RecordRenderUserComponent,
+    RecordRenderTimelineItemComponent,
   ],
   imports: [
     BrowserModule,

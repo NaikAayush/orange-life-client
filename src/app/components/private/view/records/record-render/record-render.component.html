@@ -1,0 +1,129 @@
+<div *ngIf="imageLoading" class="relative min-h-screen bg-gray-100">
+    <main class="py-10">
+        <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+            <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+                <!-- Description list-->
+
+
+                <!-- Preview-->
+                <section aria-labelledby="notes-title">
+                    <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+                        <div class="divide-y divide-gray-200">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Preview</h2>
+                            </div>
+                            <div class="px-4 py-6 sm:px-6">
+                                <img [src]="blob_url | safe">
+                            </div>
+                        </div>
+                        <div class="m-6 flex flex-col justify-stretch">
+                            <button type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                <span>&nbsp;</span>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section aria-labelledby="applicant-information-title">
+                    <div class="bg-white shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900">
+                                Record Information
+                            </h2>
+                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                Your medical record details.
+                            </p>
+                        </div>
+                        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Document Name
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{docName}}
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Document Type
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{docMimeType}}
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Document ID
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{docCID}}
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Date
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{date}}
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Comments
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{extraData}}
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+                <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+                    <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Timeline</h2>
+
+                    <!-- Activity Feed -->
+                    <div class="mt-6 flow-root">
+                        <ul class="-mb-8">
+                            <li>
+                                <app-record-render-timeline-item></app-record-render-timeline-item>
+                                <app-record-render-timeline-item></app-record-render-timeline-item>
+                                <app-record-render-timeline-item></app-record-render-timeline-item>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="timeline-title" class="lg:col-start-1 lg:col-span-1">
+                <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6 divide-y">
+                    <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Users who have access</h2>
+                    <!-- Activity Feed -->
+                    <div class="mt-6 flow-root">
+                        <div class="mb-4 flex flex-col justify-stretch">
+                            <button type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>&nbsp;</span>
+                                Add Users
+                            </button>
+                        </div>
+                        <ul class="-my-5 divide-y border-t border-gray-200 divide-gray-200">
+                            <li class="py-4">
+                                <app-record-render-user></app-record-render-user>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
