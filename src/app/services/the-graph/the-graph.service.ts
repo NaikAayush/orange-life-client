@@ -30,6 +30,7 @@ export class TheGraphService {
         publicKey
         verifyingKey
         docMimeType
+        nonce
       }
     }
   `;

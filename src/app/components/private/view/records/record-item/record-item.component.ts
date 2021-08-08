@@ -14,6 +14,8 @@ export class RecordItemComponent implements OnInit {
   @Input() vk: string;
   @Input() docName: string;
   @Input() docMimeType: string;
+  @Input() nonce: number;
+  @Input() idx: number;
   shortName: string;
   fileExtensions = ['.png', '.jpg', '.pdf'];
   color: string;
@@ -60,6 +62,10 @@ export class RecordItemComponent implements OnInit {
         this.pk +
         '/' +
         this.vk +
+        '/' +
+        this.nonce +
+        '/' +
+        this.idx +
         '/' +
         this.docName +
         '/' +

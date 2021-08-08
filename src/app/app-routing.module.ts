@@ -50,7 +50,7 @@ const routes: Routes = [
     data: { title: 'Medical Records' },
   },
   {
-    path: 'record/:id/:pk/:vk/:docName/:docMimeType/:docMimeType1',
+    path: 'record/:id/:pk/:vk/:nonce/:idx/:docName/:docMimeType/:docMimeType1',
     component: RecordRenderComponent,
     data: { title: 'Record' },
   },

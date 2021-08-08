@@ -4,6 +4,7 @@ import { DownloadService } from 'src/app/services/download/download.service';
 import { IpfsService } from 'src/app/services/ipfs/ipfs.service';
 import { TheGraphService } from 'src/app/services/the-graph/the-graph.service';
 import { UmbralService } from 'src/app/services/umbral/umbral.service';
+import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
   selector: 'app-record-render',
@@ -19,18 +20,26 @@ export class RecordRenderComponent implements OnInit {
   blob_url;
   imageLoading: boolean = false;
   scan: boolean = false;
+  input: boolean = false;
+  publicKey: string;
+  nonce: number;
+  idx: number;
+
   constructor(
     private route: ActivatedRoute,
     private thegraph: TheGraphService,
     private ipfs: IpfsService,
     private umbral: UmbralService,
-    private download: DownloadService
+    private download: DownloadService,
+    private web3: Web3Service
   ) {}
 
   async ngOnInit() {
     this.id = this.route.snapshot.params.id;
     this.pk = this.route.snapshot.params.pk;
     this.vk = this.route.snapshot.params.vk;
+    this.nonce = parseInt(this.route.snapshot.params.nonce);
+    this.idx = parseInt(this.route.snapshot.params.idx);
     this.docName = this.route.snapshot.params.docName;
     this.docMimeType =
       this.route.snapshot.params.docMimeType +
@@ -59,5 +68,13 @@ export class RecordRenderComponent implements OnInit {
   scanSuccessHandler($event) {
     console.log($event);
     this.scan = false;
+    this.input = true;
+    this.publicKey = $event;
+  }
+
+  async grantAccess() {
+    console.log(this.nonce, this.idx, this.publicKey);
+    await this.umbral.grantAccess(this.publicKey, this.nonce);
+    await this.web3.grantAccess(this.publicKey, this.idx);
   }
 }

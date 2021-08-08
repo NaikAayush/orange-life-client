@@ -8,9 +8,10 @@ import { UmbralService } from 'src/app/services/umbral/umbral.service';
   styleUrls: ['./display-qr.component.css'],
 })
 export class DisplayQrComponent implements OnInit {
+  umbralPublicKey: string;
   constructor(private auth: AuthService, private umbral: UmbralService) {}
 
-  ngOnInit(): void {
-    console.log(this.umbral.key.getPubKeyHex());
+  async ngOnInit() {
+    this.umbralPublicKey = await this.umbral.getPublicKeyHex();
   }
 }
