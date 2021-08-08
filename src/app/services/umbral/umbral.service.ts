@@ -211,12 +211,18 @@ export class UmbralService {
     const capsule = resps[0].capsule;
     console.log('got capsule', capsule);
 
+
+    const newKfrags: string[] = [];
+    fragsKeys.kfrags.forEach((el) => {
+      newKfrags.push(toHexString(el.toBytes()));
+    });
+
     await this.putKFrags(
       this.key.getPubKeyHex(),
       receiverPubKey,
       verifyKey,
       capsule,
-      fragsKeys.kfrags
+      newKfrags
     );
   }
 
