@@ -35,12 +35,8 @@ export class TheGraphService {
     }
   `;
   GET_OTHERS_RECORD = gql`
-    query GetRecords($address: String!) {
-      medicalRecords(
-        where: {
-          hasAccess_contains: ["0xc6516571012edaa15e6f505d96f28945a13f9724"]
-        }
-      ) {
+    query GetRecords($address: [String!]) {
+      medicalRecords(where: { hasAccess_contains: $address }) {
         id
         idx
         owner
@@ -61,11 +57,11 @@ export class TheGraphService {
   constructor(private apollo: Apollo, private auth: AuthService) {}
 
   async exampleQuery() {
-    return await this.apollo
-      .query<any>({
-        query: this.GET_OTHERS_RECORD,
-      })
-      .toPromise();
+    // return await this.apollo
+    //   .query<any>({
+    //     query: this.GET_OTHERS_RECORD,
+    //   })
+    //   .toPromise();
   }
 
   async getMyRecords() {
@@ -75,9 +71,23 @@ export class TheGraphService {
 
     return await this.apollo
       .query<any>({
-        query: this.GET_OTHERS_RECORD,
+        query: this.GET_MY_RECORD,
         variables: {
           address: address,
+        },
+      })
+      .toPromise();
+  }
+  async getOthersRecords() {
+    const data = await this.auth.getCredentials();
+    const address = data.address.toString().toLowerCase();
+    console.log(address);
+
+    return await this.apollo
+      .query<any>({
+        query: this.GET_OTHERS_RECORD,
+        variables: {
+          address: [address],
         },
       })
       .toPromise();

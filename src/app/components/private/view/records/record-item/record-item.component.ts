@@ -30,7 +30,6 @@ export class RecordItemComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.access = this.access - 1;
     this.fileType = 'assets/fileIcons/' + this.name.split('.').pop() + '.svg';
     this.name = this.cleanName(this.name);
     this.shortName = this.name.slice(0, 2).toUpperCase();

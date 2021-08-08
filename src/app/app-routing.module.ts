@@ -45,7 +45,12 @@ const routes: Routes = [
     data: { title: 'Scan' },
   },
   {
-    path: 'records',
+    path: 'records/:type',
+    component: RecordsComponent,
+    data: { title: 'Medical Records' },
+  },
+  {
+    path: 'trusted-records/:type',
     component: RecordsComponent,
     data: { title: 'Medical Records' },
   },
