@@ -24,19 +24,16 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
-<<<<<<< HEAD
 import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
-=======
 import { RecordsComponent } from './components/private/view/records/records.component';
 import { RecordItemComponent } from './components/private/view/records/record-item/record-item.component';
 import { RecordRenderComponent } from './components/private/view/records/record-render/record-render.component';
 import { SafePipe } from './services/safe/safe.pipe';
 import { RecordRenderUserComponent } from './components/private/view/records/record-render/record-render-user/record-render-user.component';
 import { RecordRenderTimelineItemComponent } from './components/private/view/records/record-render/record-render-timeline-item/record-render-timeline-item.component';
->>>>>>> 3fb471400c71b72b02275c583f2da867d6d98dfd
 
 const dbConfig: DBConfig = {
   name: 'MyDb',

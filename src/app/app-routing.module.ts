@@ -5,12 +5,9 @@ import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
 import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { DownloadComponent } from './components/private/view/download/download.component';
-<<<<<<< HEAD
 import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
-=======
 import { RecordRenderComponent } from './components/private/view/records/record-render/record-render.component';
 import { RecordsComponent } from './components/private/view/records/records.component';
->>>>>>> 3fb471400c71b72b02275c583f2da867d6d98dfd
 import { UploadComponent } from './components/private/view/upload/upload.component';
 
 const routes: Routes = [
@@ -46,6 +43,8 @@ const routes: Routes = [
     path: 'scan',
     component: ScanQrComponent,
     data: { title: 'Scan' },
+  },
+  {
     path: 'records',
     component: RecordsComponent,
     data: { title: 'Medical Records' },
