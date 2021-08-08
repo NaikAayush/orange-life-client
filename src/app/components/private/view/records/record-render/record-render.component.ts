@@ -77,7 +77,8 @@ export class RecordRenderComponent implements OnInit {
 
   async grantAccess() {
     console.log('DATAAA', this.nonce, this.idx, this.publicKey, this.address);
-    await this.umbral.grantAccess(this.publicKey, this.nonce);
+    const publicKey = await this.umbral.getPublicKeyFromAddress(this.address);
+    await this.umbral.grantAccess(publicKey, this.nonce);
     await this.web3.grantAccess(this.address, this.idx);
   }
 }

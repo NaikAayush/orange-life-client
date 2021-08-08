@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UmbralService } from 'src/app/services/umbral/umbral.service';
 import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
@@ -31,7 +33,12 @@ export class RecordItemComponent implements OnInit {
   ];
   fileType: string;
 
-  constructor(private router: Router, private web3: Web3Service) {}
+  constructor(
+    private router: Router,
+    private web3: Web3Service,
+    private umbral: UmbralService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.fileType = 'assets/fileIcons/' + this.name.split('.').pop() + '.svg';
@@ -83,7 +90,11 @@ export class RecordItemComponent implements OnInit {
 
   async requestAccess() {
     console.log('aaa request');
+    const data = await this.auth.getCredentials();
+    const address = data.address.toLowerCase();
+    const publicKey = await this.umbral.getPublicKeyHex();
     await this.web3.requestAccess(this.owner, this.idx);
+    await this.umbral.requestAccess(address, publicKey);
     console.log('oof request');
   }
 }

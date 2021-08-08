@@ -42,14 +42,6 @@ export class AuthService {
     // return { pk: root.privateKey?.toString('hex') };
   }
 
-  // removed since this is implemented in ProxyReEncryptionKey
-  // private async deriveRoot(index: number) {
-  // const data = await this.getCredentials();
-  // const root = bip32.fromPrivateKey(data.pk, data.chainCode);
-  // const newRoot = root.derive(index);
-  // return newRoot.privateKey.toString('hex');
-  // }
-
   private hashPrivateKey(pk: string) {
     return btoa(pk);
   }
@@ -64,7 +56,8 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem('auth');
+    console.log('logout');
+    this.dbService.clear('auth');
   }
 
   public async getCredentials() {
@@ -85,6 +78,14 @@ export class AuthService {
       chainCode: data.chainCode,
       address: address,
     });
-    // console.log('done');
+  }
+
+  async getLoginStatus() {
+    try {
+      await this.getCredentials();
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

@@ -36,6 +36,8 @@ import { RecordRenderUserComponent } from './components/private/view/records/rec
 import { RecordRenderTimelineItemComponent } from './components/private/view/records/record-render/record-render-timeline-item/record-render-timeline-item.component';
 import { RequestsComponent } from './components/private/view/requests/requests.component';
 import { RequestItemComponent } from './components/private/view/requests/request-item/request-item.component';
+import { RequestAccessComponent } from './components/private/view/request-access/request-access.component';
+import { MnemonicComponent } from './components/auth/mnemonic/mnemonic.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -78,6 +80,8 @@ const dbConfig: DBConfig = {
     RecordRenderTimelineItemComponent,
     RequestsComponent,
     RequestItemComponent,
+    RequestAccessComponent,
+    MnemonicComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,8 @@ export class AuthPwMnFormComponent implements OnInit {
 
   newAccount(newForm: NgForm) {
     console.log(newForm.value);
-    this.auth.createAccount(newForm.value.pwd);
+    const mnemonic = this.auth.createAccount(newForm.value.pwd);
+    this.router.navigateByUrl('mnemonic/' + mnemonic.mnemonic);
   }
   oldAccount(oldForm: NgForm) {
     console.log(oldForm.value);
