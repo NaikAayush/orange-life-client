@@ -26,6 +26,8 @@ import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
 import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -59,6 +61,7 @@ const dbConfig: DBConfig = {
     DashboardComponent,
     DownloadComponent,
     DisplayQrComponent,
+    ScanQrComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ const dbConfig: DBConfig = {
     BrowserAnimationsModule,
     MatSidenavModule,
     QRCodeModule,
+    ZXingScannerModule,
   ],
   providers: [
     {

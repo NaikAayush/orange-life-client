@@ -5,6 +5,7 @@ import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
 import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
 import { UploadComponent } from './components/private/view/upload/upload.component';
 
 const routes: Routes = [
@@ -35,6 +36,11 @@ const routes: Routes = [
     path: 'qr',
     component: DisplayQrComponent,
     data: { title: 'QR' },
+  },
+  {
+    path: 'scan',
+    component: ScanQrComponent,
+    data: { title: 'Scan' },
   },
 ];
 
