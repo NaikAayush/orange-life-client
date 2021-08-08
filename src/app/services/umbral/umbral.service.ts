@@ -226,6 +226,36 @@ export class UmbralService {
     );
   }
 
+  public async getPublicKeyFromAddress(address: string, maxUrsulaToCheck = 1): Promise<string> {
+    const promises: Promise<any>[] = [];
+    for (let i = 0; i < maxUrsulaToCheck; ++i) {
+      const ursula = this.ursulaDomains[i];
+      const res = this.http.post<any>(`${ursula}/v1/getPublicKey`, {address}).toPromise();
+      promises.push(res);
+    }
+
+    const resps = await Promise.all(promises);
+    let resp = resps[0];
+    for (let i = 1; i < maxUrsulaToCheck; ++i) {
+      if (resp.pubkey != resps[i].pubkey) {
+        throw new Error("Mismatch with data from ursulas! Responses " + resps);
+      }
+    }
+
+    return resp.pubkey;
+  }
+
+  public async requestAccess(address: string, publicKey: string) {
+    const promises: Promise<any>[] = [];
+    for (let i = 0; i < this.ursulaDomains.length; ++i) {
+      const ursula = this.ursulaDomains[i];
+      const res = this.http.post<any>(`${ursula}/v1/requestAccess`, {address, publicKey}).toPromise();
+      promises.push(res);
+    }
+
+    return await Promise.all(promises);
+  }
+
   public async getPublicKeyHex() {
     await this.initUmbralIfNotAlready();
     return this.key.getPubKeyHex();
