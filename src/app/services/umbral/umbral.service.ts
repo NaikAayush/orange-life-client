@@ -196,6 +196,7 @@ export class UmbralService {
   // grant access to receiverPubKey, to all documents signed with the key
   // derived from nonce
   public async grantAccess(receiverPubKey: string, nonce: number) {
+    await this.initUmbralIfNotAlready();
     const fragsKeys = this.key.generateKFragsAndSignKeys(
       this.umbral.PublicKey.fromBytes(fromHexString(receiverPubKey)),
       nonce
@@ -211,7 +212,6 @@ export class UmbralService {
     const capsule = resps[0].capsule;
     console.log('got capsule', capsule);
 
-
     const newKfrags: string[] = [];
     fragsKeys.kfrags.forEach((el) => {
       newKfrags.push(toHexString(el.toBytes()));
@@ -226,11 +226,18 @@ export class UmbralService {
     );
   }
 
-  public async getPublicKeyFromAddress(address: string, maxUrsulaToCheck = 1): Promise<string> {
+  public async getPublicKeyFromAddress(
+    address: string,
+    maxUrsulaToCheck = 1
+  ): Promise<string> {
+    console.log('in here hi aaa');
+    await this.initUmbralIfNotAlready();
     const promises: Promise<any>[] = [];
     for (let i = 0; i < maxUrsulaToCheck; ++i) {
       const ursula = this.ursulaDomains[i];
-      const res = this.http.post<any>(`${ursula}/v1/getPublicKey`, {address}).toPromise();
+      const res = this.http
+        .post<any>(`${ursula}/v1/getPublicKey`, { address })
+        .toPromise();
       promises.push(res);
     }
 
@@ -238,7 +245,7 @@ export class UmbralService {
     let resp = resps[0];
     for (let i = 1; i < maxUrsulaToCheck; ++i) {
       if (resp.pubkey != resps[i].pubkey) {
-        throw new Error("Mismatch with data from ursulas! Responses " + resps);
+        throw new Error('Mismatch with data from ursulas! Responses ' + resps);
       }
     }
 
@@ -249,7 +256,9 @@ export class UmbralService {
     const promises: Promise<any>[] = [];
     for (let i = 0; i < this.ursulaDomains.length; ++i) {
       const ursula = this.ursulaDomains[i];
-      const res = this.http.post<any>(`${ursula}/v1/requestAccess`, {address, publicKey}).toPromise();
+      const res = this.http
+        .post<any>(`${ursula}/v1/requestAccess`, { address, publicKey })
+        .toPromise();
       promises.push(res);
     }
 

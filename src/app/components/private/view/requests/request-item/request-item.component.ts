@@ -19,7 +19,8 @@ export class RequestItemComponent implements OnInit {
 
   async grantAccess(address) {
     console.log('DATAAA', this.nonce, this.idx, this.publicKey, address);
-    await this.umbral.grantAccess(this.publicKey, this.nonce);
-    await this.web3.grantAccess(address, this.idx);
+    const publicKey = await this.umbral.getPublicKeyFromAddress(address);
+    await this.umbral.grantAccess(publicKey, parseInt(this.nonce as any));
+    await this.web3.grantAccess(address, parseInt(this.idx as any));
   }
 }

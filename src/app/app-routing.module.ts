@@ -10,6 +10,8 @@ import { RecordRenderComponent } from './components/private/view/records/record-
 import { RecordsComponent } from './components/private/view/records/records.component';
 import { UploadComponent } from './components/private/view/upload/upload.component';
 import { RequestsComponent } from './components/private/view/requests/requests.component';
+import { RequestAccessComponent } from './components/private/view/request-access/request-access.component';
+import { MnemonicComponent } from './components/auth/mnemonic/mnemonic.component';
 
 const routes: Routes = [
   {
@@ -25,15 +27,20 @@ const routes: Routes = [
     component: UploadComponent,
     data: { title: 'Upload' },
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    data: { title: 'Dashboard' },
-  },
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent,
+  //   data: { title: 'Dashboard' },
+  // },
   {
     path: 'download',
     component: DownloadComponent,
     data: { title: 'Download' },
+  },
+  {
+    path: 'mnemonic/:data',
+    component: MnemonicComponent,
+    data: { title: 'Mnemonic' },
   },
   {
     path: 'qr',
@@ -69,6 +76,11 @@ const routes: Routes = [
     path: 'requests',
     component: RequestsComponent,
     data: { title: 'Requests' },
+  },
+  {
+    path: 'request',
+    component: RequestAccessComponent,
+    data: { title: 'Request' },
   },
 ];
 
