@@ -14,7 +14,7 @@ class GrantParams {
     public verifying_key: string,
     public capsule: string,
     public kfrag: string
-  ) {}
+  ) { }
 }
 
 class CfragParams {
@@ -22,7 +22,14 @@ class CfragParams {
     public delegating_pk: string,
     public receiving_pk: string,
     public verifying_key: string
-  ) {}
+  ) { }
+}
+
+class CfragResponse {
+  constructor(
+    public capsule: string,
+    public cfrag: string,
+  ) { }
 }
 
 @Injectable({
@@ -37,7 +44,7 @@ export class UmbralService {
   private ursulaDomains = environment.URSULA_DOMAINS.split(',');
   private key: ProxyReEncryptionKey;
 
-  constructor(private auth: AuthService, private http: HttpClient) {}
+  constructor(private auth: AuthService, private http: HttpClient) { }
 
   private async initUmbralIfNotAlready() {
     if (!this.umbral) {
@@ -90,14 +97,68 @@ export class UmbralService {
       return;
     }
 
+    await this.putKFrags(
+      hexData.delegatingPubKey,
+      hexData.receivingPubKey,
+      hexData.verifyKey,
+      hexData.capsule,
+      hexData.kfrags
+    );
+  }
+
+  public async decrypt(
+    senderPubKey: string,
+    verifyKey: string,
+    data: Uint8Array
+  ) {
+    await this.initUmbralIfNotAlready();
+
+    const resps = await this.getCFrags(senderPubKey, this.key.getPubKeyHex(), verifyKey);
+    let capsule: string;
+    const cfrags: string[] = [];
+    resps.forEach((resp) => {
+      capsule = resp.capsule;
+      cfrags.push(resp.cfrag);
+    });
+    const recvData = new ReceivedDataHex(this.key.getSecKeyHex(), senderPubKey, verifyKey, data, capsule, cfrags);
+    const actualRecvData = recvData.getActual(this.umbral);
+
+    return this.key.decrypt(actualRecvData);
+  }
+
+  private async getCFrags(senderPubKey: string, receiverPubKey: string, verifyKey: string) {
+    const promises: Promise<CfragResponse>[] = [];
+
+    for (let i = 0; i < this.ursulaDomains.length; ++i) {
+      const ursula = this.ursulaDomains[i];
+
+      const bodyParams = new CfragParams(senderPubKey, receiverPubKey, verifyKey);
+
+      const res = this.http
+        .post<CfragResponse>(`${ursula}/v1/cfrags`, bodyParams)
+        .toPromise();
+      promises.push(res);
+    }
+
+    const resps = await Promise.all(promises);
+
+    return resps
+  }
+
+  private async putKFrags(
+    delegatingPubKey: string,
+    receivingPubKey: string,
+    verifyKey: string,
+    capsule: string,
+    kfrags: string[]) {
     const promises = [];
-    for (let i = 0; i < hexData.kfrags.length; ++i) {
-      const kfrag = hexData.kfrags[i];
+    for (let i = 0; i < kfrags.length; ++i) {
+      const kfrag = kfrags[i];
       const bodyParams = new GrantParams(
-        hexData.delegatingPubKey,
-        hexData.receivingPubKey,
-        hexData.verifyKey,
-        hexData.capsule,
+        delegatingPubKey,
+        receivingPubKey,
+        verifyKey,
+        capsule,
         kfrag
       );
 
@@ -111,38 +172,28 @@ export class UmbralService {
     resps.forEach((resp) => {
       console.log('Response from ursula', resp);
     });
+
+    return resps;
   }
 
-  public async decrypt(
-    senderPubKey: string,
-    verifyKey: string,
-    data: Uint8Array
-  ) {
-    await this.initUmbralIfNotAlready();
+  // grant access to receiverPubKey, to all documents signed with the key
+  // derived from nonce
+  public async grantAccess(receiverPubKey: string, nonce: number) {
+    const fragsKeys = this.key.generateKFragsAndSignKeys(
+      this.umbral.PublicKey.fromBytes(fromHexString(receiverPubKey)),
+      nonce
+    );
+    const verifyKey = toHexString(fragsKeys.verifyKey.toBytes());
 
-    const promises = [];
+    const resps = await this.getCFrags(
+      this.key.getPubKeyHex(),
+      this.key.getPubKeyHex(),
+      verifyKey
+    );
 
-    for (let i = 0; i < this.ursulaDomains.length; ++i) {
-      const ursula = this.ursulaDomains[i];
+    const capsule = resps[0].capsule;
+    console.log("got capsule", capsule);
 
-      const bodyParams = new CfragParams(senderPubKey, this.key.getPubKeyHex(), verifyKey);
-
-      const res = this.http
-        .post<CfragParams>(`${ursula}/v1/cfrags`, bodyParams)
-        .toPromise();
-      promises.push(res);
-    }
-
-    const resps = await Promise.all(promises);
-    let capsule: string;
-    const cfrags: string[] = [];
-    resps.forEach((resp) => {
-      capsule = resp.capsule;
-      cfrags.push(resp.cfrag);
-    });
-    const recvData = new ReceivedDataHex(this.key.getSecKeyHex(), senderPubKey, verifyKey, data, capsule, cfrags);
-    const actualRecvData = recvData.getActual(this.umbral);
-
-    return this.key.decrypt(actualRecvData);
+    await this.putKFrags(this.key.getPubKeyHex(), receiverPubKey, verifyKey, capsule, fragsKeys.kfrags);
   }
 }

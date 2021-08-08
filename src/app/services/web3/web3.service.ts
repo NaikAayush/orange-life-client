@@ -7,6 +7,8 @@ import contractAbi from '../../../assets/contractAbi.json';
 import { environment } from 'src/environments/environment';
 import { RelayProvider } from '@opengsn/provider';
 
+const DEFAULT_GAS = 2000000;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -97,16 +99,116 @@ export class Web3Service {
     );
 
     const res = this.contract.methods
-      .addMedicalRecord(
-        cid,
-        verifyKey,
-        pubKey,
-        name,
-        mimeType,
-        extraData,
-        nonce
-      )
-      .send({ from: this.account.address, gas: 2000000 });
+      .addMedicalRecord(cid, verifyKey, pubKey, name, mimeType, extraData, nonce)
+      .send({ from: this.account.address,  gas: DEFAULT_GAS });
+
+    res
+      .once('sending', function (payload) {
+        console.log('Sending', payload);
+      })
+      .once('sent', function (payload) {
+        console.log('Sent', payload);
+      })
+      .once('transactionHash', function (hash) {
+        console.log('transactionHash', hash);
+      })
+      .once('receipt', function (receipt) {
+        console.log('Receipt', receipt);
+      })
+      .on('confirmation', function (confNumber, receipt, latestBlockHash) {
+        console.log('confirmed');
+      })
+      .on('error', function (error) {
+        console.log('error', error);
+      })
+      .then(function (receipt) {
+        // will be fired once the receipt is mined
+      });
+  }
+
+  async requestAccess(
+    ownerAddress: string,
+    index: number
+  ) {
+    await this.initPromise;
+
+    console.log("Requesting access", ownerAddress, index);
+
+    const res = this.contract.methods
+      .requestAccess(ownerAddress, index)
+      .send({ from: this.account.address,  gas: DEFAULT_GAS });
+
+    res
+      .once('sending', function (payload) {
+        console.log('Sending', payload);
+      })
+      .once('sent', function (payload) {
+        console.log('Sent', payload);
+      })
+      .once('transactionHash', function (hash) {
+        console.log('transactionHash', hash);
+      })
+      .once('receipt', function (receipt) {
+        console.log('Receipt', receipt);
+      })
+      .on('confirmation', function (confNumber, receipt, latestBlockHash) {
+        console.log('confirmed');
+      })
+      .on('error', function (error) {
+        console.log('error', error);
+      })
+      .then(function (receipt) {
+        // will be fired once the receipt is mined
+      });
+  }
+
+  async grantAccess(
+    addressToGiveAccess: string,
+    index: number
+  ) {
+    await this.initPromise;
+
+    console.log("Granting access!!", addressToGiveAccess, index);
+
+    const res = this.contract.methods
+      .grantAccess(addressToGiveAccess, index)
+      .send({ from: this.account.address,  gas: DEFAULT_GAS });
+
+    res
+      .once('sending', function (payload) {
+        console.log('Sending', payload);
+      })
+      .once('sent', function (payload) {
+        console.log('Sent', payload);
+      })
+      .once('transactionHash', function (hash) {
+        console.log('transactionHash', hash);
+      })
+      .once('receipt', function (receipt) {
+        console.log('Receipt', receipt);
+      })
+      .on('confirmation', function (confNumber, receipt, latestBlockHash) {
+        console.log('confirmed');
+      })
+      .on('error', function (error) {
+        console.log('error', error);
+      })
+      .then(function (receipt) {
+        // will be fired once the receipt is mined
+      });
+  }
+
+  async revokeAccess(
+    addressToRevokeAccess: string,
+    index: number
+  ) {
+    await this.initPromise;
+
+    console.log("Revoke access!!", addressToRevokeAccess, index);
+
+    const res = this.contract.methods
+      .grantAccess(addressToRevokeAccess, index)
+      .send({ from: this.account.address,  gas: DEFAULT_GAS });
 
     res
       .once('sending', function (payload) {
