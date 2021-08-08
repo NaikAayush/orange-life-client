@@ -7,5 +7,6 @@ module.exports = {
     os: true,
     stream: true,
     buffer: true,
+    fs: 'empty',
   },
 };

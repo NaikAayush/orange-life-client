@@ -1,0 +1,58 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div *ngIf="!file" class="text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No files</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                Get started by uploading some
+            </p>
+            <div class="mt-6">
+                <label for="file" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Choose File</label>
+                <input type="file" id="file" (change)="prepareFile($event.target.files)" class="hidden">
+            </div>
+        </div>
+
+        <form *ngIf="file" class="space-y-6" action="#" method="POST">
+            <div class="max-w-lg mx-auto">
+                <h2 class="text-lg font-medium text-gray-900">Review your files</h2>
+                <ul role="list" class="mt-6 divide-y divide-gray-200">
+                    <li>
+                        <div class="relative group py-4 flex space-x-3 justify-center items-center">
+                            <div class="flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                                </svg>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="text-sm font-medium text-gray-900">
+                                    <div>
+                                        <div class="mt-1">
+                                            <input value={{fileName}} id="filename" name="filename" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="mt-6 flex">
+                    <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Or start over again<span aria-hidden="true"> &rarr;</span></a>
+                </div>
+            </div>
+            <div>
+                <button (click)="handleFileInput()" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Upload
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+</div>

@@ -5,15 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { PublicNavbarComponent } from './components/navbar/public-navbar/public-navbar.component';
-import { PrivateNavbarComponent } from './components/navbar/private-navbar/private-navbar.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UploadComponent } from './components/dashboard/upload/upload.component';
+import { UploadComponent } from './components/private/view/upload/upload.component';
 
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
+import { PublicNavbarComponent } from './components/public/navbar/public-navbar/public-navbar.component';
+import { PrivateNavbarComponent } from './components/private/navbar/private-navbar/private-navbar.component';
+import { PrivateSidebarComponent } from './components/private/sidebar/private-sidebar/private-sidebar.component';
+import { PrivateSidebarItemComponent } from './components/private/sidebar/private-sidebar-item/private-sidebar-item.component';
+import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
+import { environment } from 'src/environments/environment';
+import { DownloadComponent } from './components/private/view/download/download.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -42,6 +52,10 @@ const dbConfig: DBConfig = {
     WelcomeComponent,
     AuthPwMnFormComponent,
     UploadComponent,
+    PrivateSidebarComponent,
+    PrivateSidebarItemComponent,
+    DashboardComponent,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +64,23 @@ const dbConfig: DBConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
+    BrowserAnimationsModule,
+    MatSidenavModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: environment.THEGRAPH_URI,
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

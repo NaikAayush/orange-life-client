@@ -1,0 +1,143 @@
+<div class="relative h-screen flex overflow-hidden bg-white">
+    <div class="flex flex-col min-w-0 flex-1 overflow-hidden">
+        <div class="lg:hidden">
+            <div class="flex items-center justify-between bg-gray-50 border-b border-gray-200 px-4 py-1.5">
+                <div>
+                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-pink-500.svg" alt="Workflow">
+                </div>
+                <div>
+                    <button type="button" class="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-600">
+                        <span class="sr-only">Open sidebar</span>
+                        <!-- Heroicon name: outline/menu -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <h1>hi</h1>
+        </div>
+        <div class="flex relative">
+            <div class="xl:order-first xl:flex xl:flex-col flex-shrink-0 w-full border-r border-gray-200">
+                <div class="px-6 pt-6 pb-4">
+                    <h2 class="text-lg font-medium text-gray-900">Directory</h2>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Search directory of 3,018 employees
+                    </p>
+                    <form class="mt-6 flex space-x-4" action="#">
+                        <div class="flex-1 min-w-0">
+                            <label for="search" class="sr-only">Search</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <!-- Heroicon name: solid/search -->
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <input type="search" name="search" id="search" class="focus:ring-pink-500 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Search">
+                            </div>
+                        </div>
+                        <button type="submit" class="inline-flex justify-center px-3.5 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                            <!-- Heroicon name: solid/filter -->
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </form>
+                </div>
+                <!-- Directory list -->
+                <nav class="flex-1 min-h-0 overflow-y-auto" aria-label="Directory">
+                    <div class="relative">
+                        <div class="z-10 sticky top-0 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
+                            <h3>A</h3>
+                        </div>
+                        <ul class="relative z-0 divide-y divide-gray-200">
+                            <li>
+                                <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <a href="#" class="focus:outline-none">
+                                            <!-- Extend touch target to entire panel -->
+                                            <span class="absolute inset-0" aria-hidden="true"></span>
+                                            <p class="text-sm font-medium text-gray-900">
+                                                Leslie Abbott
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate">
+                                                Co-Founder / CEO
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <a href="#" class="focus:outline-none">
+                                            <!-- Extend touch target to entire panel -->
+                                            <span class="absolute inset-0" aria-hidden="true"></span>
+                                            <p class="text-sm font-medium text-gray-900">
+                                                Hector Adams
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate">
+                                                VP, Marketing
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <a href="#" class="focus:outline-none">
+                                            <!-- Extend touch target to entire panel -->
+                                            <span class="absolute inset-0" aria-hidden="true"></span>
+                                            <p class="text-sm font-medium text-gray-900">
+                                                Blake Alexander
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate">
+                                                Account Coordinator
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <a href="#" class="focus:outline-none">
+                                            <!-- Extend touch target to entire panel -->
+                                            <span class="absolute inset-0" aria-hidden="true"></span>
+                                            <p class="text-sm font-medium text-gray-900">
+                                                Fabricio Andrews
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate">
+                                                Senior Art Director
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

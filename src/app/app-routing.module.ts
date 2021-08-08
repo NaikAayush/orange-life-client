@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
-import { UploadComponent } from './components/dashboard/upload/upload.component';
+import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
+import { DownloadComponent } from './components/private/view/download/download.component';
+import { UploadComponent } from './components/private/view/upload/upload.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,17 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadComponent,
+    data: { title: 'Upload' },
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    data: { title: 'Dashboard' },
+  },
+  {
+    path: 'download',
+    component: DownloadComponent,
+    data: { title: 'Download' },
   },
 ];
 

@@ -11,7 +11,6 @@ export class PublicNavbarComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
   setMenuState() {
     if (this.menuState == true) {
       this.menuState = false;

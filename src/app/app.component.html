@@ -1,3 +1,27 @@
-<app-public-navbar></app-public-navbar>
-<!-- <app-welcome></app-welcome> -->
-<router-outlet></router-outlet>
+<div class="wrapper">
+    <mat-drawer-container class="example-container h-screen" [hasBackdrop]="backdrop">
+        <mat-drawer #drawer [mode]="mode" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+            <app-private-sidebar></app-private-sidebar>
+        </mat-drawer>
+        <mat-drawer-content>
+            <nav class="bg-white shadow">
+                <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                    <div class="relative flex justify-between h-16">
+                        <div class="absolute inset-y-0 left-4 flex items-center">
+                            <button *ngIf="mobile" mat-raised-button (click)="drawer.toggle()">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                            <span *ngIf="mobile">&nbsp;&nbsp;&nbsp;</span>
+                            <h2 class="text-2xl font-semibold leading-7 text-gray-900">
+                                {{data.title}}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

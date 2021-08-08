@@ -16,11 +16,33 @@ export class UploadComponent implements OnInit {
     private web3: Web3Service
   ) {}
 
+  menuState: boolean = false;
+  file: boolean = false;
+  fileName: String = '';
+  files: FileList;
+  menuItems = ['Dashboard', 'Medical Records', 'Requests', 'Trusted Contacts'];
+
+  setMenuState() {
+    if (this.menuState == true) {
+      this.menuState = false;
+    } else {
+      this.menuState = true;
+    }
+  }
+
   ngOnInit(): void {}
-  async handleFileInput(files: FileList) {
-    const encryptedData = await this.umbral.uploadFile(files.item(0));
+
+  async prepareFile(files: FileList) {
+    this.files = files;
+    this.file = true;
+    this.fileName = files.item(0).name;
+  }
+
+  async handleFileInput() {
+    const fileToUpload = this.files.item(0);
+    const encryptedData = await this.umbral.uploadFile(fileToUpload);
     const encryptedFile = this.umbral.getDataAsFile(
-      files.item(0).name,
+      fileToUpload.name,
       encryptedData
     );
     const client = this.ipfs.connectToNetwork();
@@ -33,6 +55,8 @@ export class UploadComponent implements OnInit {
     console.log('hmm');
     await this.web3.getRecords();
     await this.web3.addRecord(
+      fileToUpload.name,
+      fileToUpload.type,
       uploadedFile.cid.toString(),
       toHexString(encryptedData.verifyKey.toBytes()),
       toHexString(encryptedData.delegatingPubKey.toBytes()),

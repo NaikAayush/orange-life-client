@@ -4,6 +4,8 @@ import { Account as Web3Account } from 'web3-core';
 import { Contract } from 'web3-eth-contract';
 import { AuthService } from '../auth/auth.service';
 import contractAbi from '../../../assets/contractAbi.json';
+import { environment } from 'src/environments/environment';
+import { RelayProvider } from '@opengsn/provider';
 
 @Injectable({
   providedIn: 'root',
@@ -20,15 +22,43 @@ export class Web3Service {
   }
 
   async init() {
-    this.web3 = new Web3('http://localhost:8545');
+    this.web3 = new Web3(environment.INFURA_URL);
+
+    const configuration = {
+      relayHubAddress: '0x6646cD15d33cE3a6933e36de38990121e8ba2806',
+      // OrangePayMaster
+      paymasterAddress: '0x2dA3AB663a01dBd1dDB53F16B0BB925C815B1361',
+      // their accept-all paymaster
+      // paymasterAddress: '0xcA94aBEdcC18A10521aB7273B3F3D5ED28Cf7B8A',
+      // forwarderAddress: '0x4d4581c01A457925410cd3877d17b2fd4553b2C5',
+      // ourContract: '0xAd7879348C00AD6E5c88E418b7E66A0D386Ee733',
+      loggerConfiguration: {
+        logLevel: 'debug' as any
+      },
+      // preferredRelays: ['0x1d89e298a3aB270F4E0644D6dA46C6E001b34e3A'],
+      relayRegistrationLookupBlocks: 60000,
+      sliceSize: 1
+    };
+
+    const provider = await RelayProvider.newProvider({
+      provider: this.web3.currentProvider as any,
+      config: configuration
+    }).init();
+    // const provider = new RelayProvider(
+    //   this.web3.currentProvider as any,
+    //   configuration
+    // );
+    this.web3 = new Web3(provider);
+
     const data = await this.auth.getCredentials();
     const pk = data.pk;
     this.account = this.web3.eth.accounts.privateKeyToAccount(pk);
+    provider.addAccount(this.account.privateKey);
     console.log(this.account);
 
     this.contract = new this.web3.eth.Contract(
       contractAbi as any,
-      '0x66d4d274faaaef7ee8536c6b4c1c306b3c5c7651',
+      '0x9cc6c1FB0ee80a2389a286da0BB7903dE0175172',
       { from: this.account.address }
     );
   }
@@ -43,21 +73,21 @@ export class Web3Service {
   }
 
   async addRecord(
+    name: string,
+    mimeType: string,
     cid: string,
     verifyKey: string,
     pubKey: string,
-    nonce: number
+    nonce: number,
+    extraData: string = ""
   ) {
     await this.initPromise;
 
-    console.log("adding record", cid, verifyKey, pubKey, nonce);
+    console.log('adding record', name, mimeType, cid, verifyKey, pubKey, nonce, extraData, this.account.address);
 
-    const res = this.contract.methods.addMedicalRecord(
-      cid,
-      verifyKey,
-      pubKey,
-      nonce
-    ).send({gasPrice: 1000, gas: 6721975});
+    const res = this.contract.methods
+      .addMedicalRecord(cid, verifyKey, pubKey, name, mimeType, extraData, nonce)
+      .send({ from: this.account.address,  gas: 2000000 });
 
     res
       .once('sending', function (payload) {
