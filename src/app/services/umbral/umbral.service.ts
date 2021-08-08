@@ -39,7 +39,7 @@ export class UmbralService {
   // TODO: make this environment var
   // TODO: ensure 3 ursulas
   private ursulaDomains = environment.URSULA_DOMAINS.split(',');
-  public key: ProxyReEncryptionKey;
+  private key: ProxyReEncryptionKey;
 
   constructor(private auth: AuthService, private http: HttpClient) {}
 
@@ -218,5 +218,10 @@ export class UmbralService {
       capsule,
       fragsKeys.kfrags
     );
+  }
+
+  public async getPublicKeyHex() {
+    await this.initUmbralIfNotAlready();
+    return this.key.getPubKeyHex();
   }
 }
