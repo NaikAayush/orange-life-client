@@ -29,13 +29,14 @@ jobs:
           node-version: "14.x"
       - run: npm install
       - run: npm run config:prod
+        env:
+          URSULA_DOMAINS: ${{ secrets.URSULA_DOMAINS }}
+          IPFS_GATEWAY: ${{ secrets.IPFS_GATEWAY }}
+          INFURA_URL: ${{ secrets.INFURA_URL }}
+          THEGRAPH_URI: ${{ secrets.THEGRAPH_URI }}
       - run: npm run build
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          URSULA_DOMAINS: ${{ secrets.URSULA_DOMAINS }}
-          IPFS_GATEWAY: ${{ secrets.IPFS_GATEWAY }}
-          INFURA_URL: ${{ secrets.INFURA_URL }}
-          THEGRAPH_URI: ${{ secrets.THEGRAPH_URI }}
