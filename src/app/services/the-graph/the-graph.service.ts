@@ -34,6 +34,26 @@ export class TheGraphService {
       }
     }
   `;
+  GET_OTHERS_RECORD = gql`
+    query GetRecords($address: String!) {
+      medicalRecords(
+        where: {
+          hasAccess_contains: ["0xc6516571012edaa15e6f505d96f28945a13f9724"]
+        }
+      ) {
+        id
+        idx
+        owner
+        docCID
+        docName
+        hasAccess
+        publicKey
+        verifyingKey
+        docMimeType
+        nonce
+      }
+    }
+  `;
   private querySubscription;
   loading: boolean;
   posts: any;
@@ -43,7 +63,7 @@ export class TheGraphService {
   async exampleQuery() {
     return await this.apollo
       .query<any>({
-        query: this.GET_RECORD,
+        query: this.GET_OTHERS_RECORD,
       })
       .toPromise();
   }
@@ -55,7 +75,7 @@ export class TheGraphService {
 
     return await this.apollo
       .query<any>({
-        query: this.GET_MY_RECORD,
+        query: this.GET_OTHERS_RECORD,
         variables: {
           address: address,
         },

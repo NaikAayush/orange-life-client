@@ -24,6 +24,7 @@ export class RecordRenderComponent implements OnInit {
   publicKey: string;
   nonce: number;
   idx: number;
+  address: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +55,7 @@ export class RecordRenderComponent implements OnInit {
     this.imageLoading = true;
   }
 
-  async onClick() {
+  async downloadFile() {
     const fileBlob = await this.ipfs.downloadFile(this.id);
     const uArray = new Uint8Array(await fileBlob.arrayBuffer());
     const decryptData = await this.umbral.decrypt(this.pk, this.vk, uArray);
@@ -67,14 +68,16 @@ export class RecordRenderComponent implements OnInit {
 
   scanSuccessHandler($event) {
     console.log($event);
+    const data: string = $event;
+    this.publicKey = data.split('.')[0];
+    this.address = data.split('.')[1];
     this.scan = false;
     this.input = true;
-    this.publicKey = $event;
   }
 
   async grantAccess() {
-    console.log(this.nonce, this.idx, this.publicKey);
+    console.log('DATAAA', this.nonce, this.idx, this.publicKey, this.address);
     await this.umbral.grantAccess(this.publicKey, this.nonce);
-    await this.web3.grantAccess(this.publicKey, this.idx);
+    await this.web3.grantAccess(this.address, this.idx);
   }
 }
