@@ -149,27 +149,6 @@ export class Web3Service {
       .grantAccess(addressToRevokeAccess, index)
       .send({ from: this.account.address,  gas: DEFAULT_GAS });
 
-    res
-      .once('sending', function (payload) {
-        console.log('Sending', payload);
-      })
-      .once('sent', function (payload) {
-        console.log('Sent', payload);
-      })
-      .once('transactionHash', function (hash) {
-        console.log('transactionHash', hash);
-      })
-      .once('receipt', function (receipt) {
-        console.log('Receipt', receipt);
-      })
-      .on('confirmation', function (confNumber, receipt, latestBlockHash) {
-        console.log('confirmed');
-      })
-      .on('error', function (error) {
-        console.log('error', error);
-      })
-      .then(function (receipt) {
-        // will be fired once the receipt is mined
-      });
+    console.log("transaction done!!", res);
   }
 }
