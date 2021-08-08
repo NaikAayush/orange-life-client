@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Web3Service } from './services/web3/web3.service';
 import { filter, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit {
           this.titleService.setTitle(data.title);
         });
       });
+    console.log(environment);
   }
   getChild(activatedRoute: ActivatedRoute) {
     if (activatedRoute.firstChild) {
