@@ -3,10 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthPwMnFormComponent } from './components/auth/auth-pw-mn-form/auth-pw-mn-form.component';
 import { WelcomeComponent } from './components/auth/welcome/welcome.component';
 import { DashboardComponent } from './components/private/view/dashboard/dashboard.component';
+import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
 import { RecordRenderComponent } from './components/private/view/records/record-render/record-render.component';
 import { RecordsComponent } from './components/private/view/records/records.component';
 import { UploadComponent } from './components/private/view/upload/upload.component';
+import { RequestsComponent } from './components/private/view/requests/requests.component';
 
 const routes: Routes = [
   {
@@ -33,14 +36,39 @@ const routes: Routes = [
     data: { title: 'Download' },
   },
   {
-    path: 'records',
+    path: 'qr',
+    component: DisplayQrComponent,
+    data: { title: 'QR' },
+  },
+  {
+    path: 'scan',
+    component: ScanQrComponent,
+    data: { title: 'Scan' },
+  },
+  {
+    path: 'records/:type',
     component: RecordsComponent,
     data: { title: 'Medical Records' },
   },
   {
-    path: 'record/:id/:pk/:vk/:docName/:docMimeType/:docMimeType1',
+    path: 'records/:type',
+    component: RecordsComponent,
+    data: { title: 'Medical Records' },
+  },
+  {
+    path: 'records/:type/:userID',
+    component: RecordsComponent,
+    data: { title: 'Medical Records' },
+  },
+  {
+    path: 'record/:id/:pk/:vk/:nonce/:idx/:docName/:docMimeType/:docMimeType1',
     component: RecordRenderComponent,
     data: { title: 'Record' },
+  },
+  {
+    path: 'requests',
+    component: RequestsComponent,
+    data: { title: 'Requests' },
   },
 ];
 

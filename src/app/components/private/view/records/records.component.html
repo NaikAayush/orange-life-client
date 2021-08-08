@@ -1,8 +1,8 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="m-4">
     <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div div *ngFor="let item of data;">
-            <app-record-item [name]="item.docName" [access]="item.hasAccess.length" [id]="item.id" [pk]="item.publicKey" [vk]="item.verifyingKey" [docName]="item.docName" [docMimeType]="item.docMimeType"></app-record-item>
+        <div div *ngFor="let item of data1;">
+            <app-record-item [name]="item.docName" [access]="item.hasAccess.length" [id]="item.id" [pk]="item.publicKey" [vk]="item.verifyingKey" [docName]="item.docName" [docMimeType]="item.docMimeType" [nonce]="item.nonce" [idx]="item.idx" [status]="item.status" [owner]="item.owner"></app-record-item>
         </div>
     </ul>
 </div>

@@ -22,10 +22,6 @@ export class DownloadComponent implements OnInit {
       '023c5046a71ebde4021ae90e56f14c3aee1b2f26824cb291c6b57cd5ba064f70c2';
     const docid = 'QmNtokC8NXQoRhgoxmMUUuBRWx6SE4t4k6CNmXsx4C2iD4';
 
-    // const data = await this.thegraph.exampleQuery();
-    // const ipfsID = data[0].docCID;
-    // console.log(data.data.medicalRecords[0].docCID);
-
     const fileBlob = await this.ipfs.downloadFile(docid);
     const uArray = new Uint8Array(await fileBlob.arrayBuffer());
     const decryptData = await this.umbral.decrypt(

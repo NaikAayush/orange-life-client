@@ -24,12 +24,18 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { DisplayQrComponent } from './components/private/view/display-qr/display-qr.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ScanQrComponent } from './components/private/view/scan-qr/scan-qr.component';
 import { RecordsComponent } from './components/private/view/records/records.component';
 import { RecordItemComponent } from './components/private/view/records/record-item/record-item.component';
 import { RecordRenderComponent } from './components/private/view/records/record-render/record-render.component';
 import { SafePipe } from './services/safe/safe.pipe';
 import { RecordRenderUserComponent } from './components/private/view/records/record-render/record-render-user/record-render-user.component';
 import { RecordRenderTimelineItemComponent } from './components/private/view/records/record-render/record-render-timeline-item/record-render-timeline-item.component';
+import { RequestsComponent } from './components/private/view/requests/requests.component';
+import { RequestItemComponent } from './components/private/view/requests/request-item/request-item.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -62,12 +68,16 @@ const dbConfig: DBConfig = {
     PrivateSidebarItemComponent,
     DashboardComponent,
     DownloadComponent,
+    DisplayQrComponent,
+    ScanQrComponent,
     RecordsComponent,
     RecordItemComponent,
     RecordRenderComponent,
     SafePipe,
     RecordRenderUserComponent,
     RecordRenderTimelineItemComponent,
+    RequestsComponent,
+    RequestItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +88,8 @@ const dbConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(dbConfig),
     BrowserAnimationsModule,
     MatSidenavModule,
+    QRCodeModule,
+    ZXingScannerModule,
   ],
   providers: [
     {

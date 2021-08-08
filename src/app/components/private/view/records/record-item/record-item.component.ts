@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Web3Service } from 'src/app/services/web3/web3.service';
 
 @Component({
   selector: 'app-record-item',
@@ -14,7 +15,12 @@ export class RecordItemComponent implements OnInit {
   @Input() vk: string;
   @Input() docName: string;
   @Input() docMimeType: string;
+  @Input() nonce: number;
+  @Input() idx: number;
+  @Input() status: boolean;
+  @Input() owner: string;
   shortName: string;
+  fileAccess: boolean;
   fileExtensions = ['.png', '.jpg', '.pdf'];
   color: string;
   colorArray = [
@@ -25,10 +31,9 @@ export class RecordItemComponent implements OnInit {
   ];
   fileType: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private web3: Web3Service) {}
 
   ngOnInit() {
-    this.access = this.access - 1;
     this.fileType = 'assets/fileIcons/' + this.name.split('.').pop() + '.svg';
     this.name = this.cleanName(this.name);
     this.shortName = this.name.slice(0, 2).toUpperCase();
@@ -53,17 +58,32 @@ export class RecordItemComponent implements OnInit {
   }
 
   openRecord() {
-    this.router.navigateByUrl(
-      'record/' +
-        this.id +
-        '/' +
-        this.pk +
-        '/' +
-        this.vk +
-        '/' +
-        this.docName +
-        '/' +
-        this.docMimeType
-    );
+    console.log(this.status);
+    if (this.status == false) {
+      console.log('nooo');
+    } else {
+      this.router.navigateByUrl(
+        'record/' +
+          this.id +
+          '/' +
+          this.pk +
+          '/' +
+          this.vk +
+          '/' +
+          this.nonce +
+          '/' +
+          this.idx +
+          '/' +
+          this.docName +
+          '/' +
+          this.docMimeType
+      );
+    }
+  }
+
+  async requestAccess() {
+    console.log('aaa request');
+    await this.web3.requestAccess(this.owner, this.idx);
+    console.log('oof request');
   }
 }

@@ -1,0 +1,23 @@
+<ul class="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+    <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+        <div class="w-full flex items-center justify-between p-6 space-x-6">
+            <div class="flex-1 truncate">
+                <div class="flex items-center space-x-3">
+                    <h3 class="text-gray-900 text-sm font-medium truncate">{{fileName}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="-mt-px flex divide-x divide-gray-200">
+            <div class="w-0 flex-1 flex">
+                <span *ngFor="let item of address;" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                    <span class="ml-3 break-all">{{item}}</span>
+                    <span>&nbsp;&nbsp;</span>
+                    <button (click)="grantAccess(item)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Give Access
+                    </button>
+                </span>
+            </div>
+        </div>
+
+    </li>
+</ul>
