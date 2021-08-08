@@ -24,6 +24,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 import { DownloadComponent } from './components/private/view/download/download.component';
+import { RecordsComponent } from './components/private/view/records/records.component';
+import { RecordItemComponent } from './components/private/view/records/record-item/record-item.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -56,6 +58,8 @@ const dbConfig: DBConfig = {
     PrivateSidebarItemComponent,
     DashboardComponent,
     DownloadComponent,
+    RecordsComponent,
+    RecordItemComponent,
   ],
   imports: [
     BrowserModule,
