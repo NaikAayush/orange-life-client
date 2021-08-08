@@ -18,6 +18,7 @@ export class RecordRenderComponent implements OnInit {
   docMimeType: string;
   blob_url;
   imageLoading: boolean = false;
+  scan: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private thegraph: TheGraphService,
@@ -49,5 +50,14 @@ export class RecordRenderComponent implements OnInit {
     const uArray = new Uint8Array(await fileBlob.arrayBuffer());
     const decryptData = await this.umbral.decrypt(this.pk, this.vk, uArray);
     this.download.downloadBlob(decryptData, this.docName, this.docMimeType);
+  }
+
+  startScan() {
+    this.scan = true;
+  }
+
+  scanSuccessHandler($event) {
+    console.log($event);
+    this.scan = false;
   }
 }
